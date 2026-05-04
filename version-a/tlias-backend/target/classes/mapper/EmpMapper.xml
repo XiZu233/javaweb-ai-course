@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tlias.mapper.EmpMapper">
+
+    <resultMap id="empResultMap" type="com.tlias.pojo.Emp">
+        <id property="id" column="id"/>
+        <result property="deptName" column="dept_name"/>
+        <collection property="exprList" ofType="com.tlias.pojo.EmpExpr"
+                    select="com.tlias.mapper.EmpExprMapper.getByEmpId" column="id"/>
+    </resultMap>
+
+    <select id="list" resultMap="empResultMap">
+        select e.*, d.name as dept_name
+        from emp e
+        left join dept d on e.dept_id = d.id
+        <where>
+            <if test="name != null and name != ''">
+                and e.name like concat('%', #{name}, '%')
+            </if>
+            <if test="gender != null">
+                and e.gender = #{gender}
+            </if>
+            <if test="begin != null and begin != ''">
+                and e.entrydate >= #{begin}
+            </if>
+            <if test="end != null and end != ''">
+                and e.entrydate &lt;= #{end}
+            </if>
+        </where>
+        order by e.update_time desc
+    </select>
+
+    <delete id="deleteByIds">
+        delete from emp where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getById" resultMap="empResultMap">
+        select e.*, d.name as dept_name
+        from emp e
+        left join dept d on e.dept_id = d.id
+        where e.id = #{id}
+    </select>
+
+    <update id="update">
+        update emp
+        <set>
+            <if test="username != null">username = #{username},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="image != null">image = #{image},</if>
+            <if test="job != null">job = #{job},</if>
+            <if test="entrydate != null">entrydate = #{entrydate},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            update_time = now()
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

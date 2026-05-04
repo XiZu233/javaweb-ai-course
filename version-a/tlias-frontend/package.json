@@ -1,0 +1,24 @@
+{
+  "name": "tlias-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "core-js": "^3.33.0",
+    "element-ui": "^2.15.14",
+    "vue": "^2.7.14",
+    "vue-router": "^3.6.5",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.8",
+    "@vue/cli-service": "~5.0.8",
+    "sass": "^1.69.0",
+    "sass-loader": "^13.3.0",
+    "vue-template-compiler": "^2.7.14"
+  }
+}
