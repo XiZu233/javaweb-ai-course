@@ -64,7 +64,7 @@ docker-compose up -d
 ## 项目结构
 
 ```
-tlias-training/
+javaweb-ai-course/
 ├── docs/                    # 课程文档（Markdown，可自学）
 ├── version-a/               # 传统实训版代码
 │   ├── tlias-backend/       # SpringBoot2后端

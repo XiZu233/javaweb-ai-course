@@ -22,3 +22,7 @@ Thumbs.db
 
 # Environment
 .env
+
+# AI assistant
+.claude/
+*.output
